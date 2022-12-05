@@ -11,7 +11,7 @@ import subprocess
 import logging
 
 
-async def check_address(address: str, gaia_home: str = '~/.gaia'):
+async def check_address(address: str, gaia_home: str = '~/.flash'):
     """
     flashd keys parse <address>
     """
@@ -35,7 +35,7 @@ async def check_address(address: str, gaia_home: str = '~/.gaia'):
     return None
 
 
-async def get_balance_list(address: str, node: str, gaia_home: str = '~/.gaia'):
+async def get_balance_list(address: str, node: str, gaia_home: str = '~/.flash'):
     """
     flashd query bank balances <address> <node> <chain-id>
     """

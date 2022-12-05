@@ -10,7 +10,7 @@ denomination   = "uflsh"
 
 [testnets]
     [testnets.flash]
-    node_url = ""
+    node_url = "http://localhost:36657"
     chain_id = "flash"
     faucet_address = "cosmos1jqu3m3zuyerzlzp7kh3fa3lmuamtuwqjjxmynh"
     daily_cap = "10000000000"
