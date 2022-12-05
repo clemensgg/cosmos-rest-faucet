@@ -1,5 +1,5 @@
 """
-gaiad utility functions
+flashd utility functions
 - query bank balance
 - query tx
 - node status
@@ -13,9 +13,9 @@ import logging
 
 async def check_address(address: str, gaia_home: str = '~/.gaia'):
     """
-    gaiad keys parse <address>
+    flashd keys parse <address>
     """
-    check = subprocess.run(["gaiad", "keys", "parse",
+    check = subprocess.run(["flashd", "keys", "parse",
                             f"{address}",
                             f'--home={gaia_home}',
                             '--output=json'],
@@ -37,9 +37,9 @@ async def check_address(address: str, gaia_home: str = '~/.gaia'):
 
 async def get_balance_list(address: str, node: str, gaia_home: str = '~/.gaia'):
     """
-    gaiad query bank balances <address> <node> <chain-id>
+    flashd query bank balances <address> <node> <chain-id>
     """
-    balance = subprocess.run(["gaiad", "query", "bank", "balances",
+    balance = subprocess.run(["flashd", "query", "bank", "balances",
                               f"{address}",
                               f'--node={node}',
                               f'--home={gaia_home}',
@@ -69,12 +69,12 @@ async def tx_send(request: dict):
     - "fees"
     - "node"
     - "chain_id"
-    gaiad tx bank send <from address> <to address> <amount>
+    flashd tx bank send <from address> <to address> <amount>
                        <fees> <node> <chain-id>
                        --keyring-backend=test -y
 
     """
-    tx_gaia = subprocess.run(['gaiad', 'tx', 'bank', 'send',
+    tx_gaia = subprocess.run(['flashd', 'tx', 'bank', 'send',
                               f'{request["sender"]}',
                               f'{request["recipient"]}',
                               f'{request["amount"]}',
@@ -85,6 +85,9 @@ async def tx_send(request: dict):
                               '--keyring-backend=test',
                               '--output=json',
                               '-y'],
+    logging.info(" ".join(cmd))
+    print(" ".join(cmd))
+    tx_gaia = subprocess.run(cmd,
                              stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     try:
         tx_gaia.check_returncode()
